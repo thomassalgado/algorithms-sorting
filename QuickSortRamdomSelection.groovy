@@ -14,32 +14,36 @@ class QuickSortRamdomSelection {
     }
     
     static private def quickSort(List input, begin, end) {
-        if(begin < end) {
-            def pivo = partition(input, begin, end)
-            quickSort(input, begin, pivo - 1)
-            quickSort(input, pivo + 1, end)    
+        int pivot = partition(input, begin, end);
+        if (begin < pivot - 1){
+            quickSort(input, begin, pivot - 1);
+        }
+        if (pivot < end){
+            quickSort(input, pivot, end);
         }
     }
     
     static private def partition(List input, begin, end) {
-        
-        Integer number = Math.floor(Math.random() * input.size) % input.size
-
-        def pivo = input[number]
         def i = begin
+        def j = end
         
-        for(def j = begin; j <= end - 1; j++) {
-            if(input[j] < pivo) {
-                def aux = input[i]
-                input[i] = input[j]
-                input[j] = aux
-                i++            
+        Integer number = (Math.floor(Math.random() * input.size) % (end - begin)) + begin
+
+        def pivot = input[number]
+        
+        while (i <= j) {
+            while (input[i] < pivot)
+                  i++;
+            while (input[j] > pivot)
+                  j--;
+            if (i <= j) {
+                  def aux = input[i]
+                  input[i] = input[j]
+                  input[j] = aux
+                  i++
+                  j--
             }
         }
-      
-        def aux = input[i]
-        input[i] = input[end]
-        input[end] = aux
-        return i   
+      return i
     }
 }
