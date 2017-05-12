@@ -37,5 +37,3 @@ def partition(List input, begin, end) {
     input[end] = aux
     return i   
 }
-
-sort([20,31,42,13,8,9,3,1,2,5,7,4])
